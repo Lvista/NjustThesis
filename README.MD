@@ -22,6 +22,7 @@ This repository is based on the [packyan](https://github.com/packyan/NJUST_Maste
 
 ## 特点
 
+- 友好的指引文档
 - 支持 Texlive 2025
 - 支持 [GBT-7714 2015](https://github.com/zepinglee/gbt7714-bibtex-style) 
 
