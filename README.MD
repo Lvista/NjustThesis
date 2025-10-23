@@ -47,5 +47,4 @@ This repository is based on the [packyan](https://github.com/packyan/NJUST_Maste
 
 | 日期 | 版本 |更新内容 |
 |------|----------|----------|
-| 2024-01-15 | 更新文档格式 |
-| 2024-01-10 | 初始版本 |
+| 2024-10-23 |v0.1| 初版模版 |
