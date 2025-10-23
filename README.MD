@@ -1,4 +1,4 @@
-# NJUST Master Thesis Latex Template
+# NjustThesis
 
 ![最后更新](https://img.shields.io/badge/Latest-2024--01--15-green?logo=github)
 
