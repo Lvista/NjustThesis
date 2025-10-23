@@ -1,6 +1,6 @@
 # NjustThesis
 
-![最后更新](https://img.shields.io/badge/Latest-2024--01--15-green?logo=github)
+![最后更新](https://img.shields.io/badge/Latest-2025--10--23-green?logo=github)
 
 **Title(Chinese)**: 南京理工大学硕士学位论文Latex模板
 
