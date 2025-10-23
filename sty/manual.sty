@@ -1,0 +1,69 @@
+%% This file is manual.sty
+%% ---------------------------------------------------
+
+%% This .sty file is to make this manual looks better,
+%% therefore, you can comment out the corresponding code 
+%% in custom.sty without using this library
+
+%% Author: github@Lvista<czc_cn@outlook.com>
+%% Latest: 2025-10-19
+
+%% This program can be redistributed and/or modified under the terms
+%% of the GNU Public License, version 2.
+%% ---------------------------------------------------
+
+
+%%***************************** Header Start *********************************
+%% If you don't know what this is, please don't modify it
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{sty/manual}[2025/10/19 v0.1 commons macros package]
+\DeclareOption*{
+\PackageWarning{manual}{Unknown option '\CurrentOption'}
+}
+\ProcessOptions\relax
+%%***************************** Header End *********************************
+
+%% Markdown style inline code
+%% e.g. this\ilcode{RequirePackage\{graphicx\}}is inline code
+\RequirePackage{tcolorbox}
+\RequirePackage{xparse}
+\NewDocumentCommand{\ilcode}{v}{%
+    \tcbox[
+        % breakable,
+        on line,
+        boxsep=0pt,
+        left=3pt,
+        right=3pt,
+        top=1.5pt,
+        bottom=1pt,
+        colback=gray!8,
+        colframe=gray!25,
+        arc=4pt,
+        boxrule=0.8pt,
+        fontupper=\ttfamily\normalsize,
+        before upper={\color{black!80}}
+    ]{\detokenize{#1}}%
+}
+
+\newcommand{\dotitem}[1]{\textbullet\hspace{0.5em}#1\par}
+\newcommand{\BibTeX}{
+    \textsc{B\kern-0.1emi\kern-0.017emb}\kern-0.15em\TeX
+    }
+\newcommand{\CTeXlogo}{%
+  \href{https://texdoc.org/serve/ctex.pdf/0}{%
+    \rmfamily{C\kern-0.15em\TeX}%
+  }%
+}
+\RequirePackage{layout}             % use to show layout in chap1
+\newlength{\actualtop}
+\setlength{\actualtop}{\topmargin}
+\addtolength{\actualtop}{1in}
+\addtolength{\actualtop}{\headheight}
+\addtolength{\actualtop}{\headsep}
+
+\RequirePackage{pifont}
+\RequirePackage{xcolor}
+\newcommand{\redstar}{\textcolor{red}{\ding{72}}}
+\newcommand{\prohibit}{\textcolor{red}{\ding{55}}}
+
+\endinput

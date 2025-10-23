@@ -1,0 +1,115 @@
+\documentclass{ctexart}
+\usepackage[utf8]{inputenc}
+\usepackage[numbers,sort&compress]{natbib}
+\bibliographystyle{bib/gbt7714-numerical_njust}
+
+
+\usepackage{tcolorbox}
+\newcommand{\latexcmd}[1]{%
+    \tcbox[%  ← 这里应该是方括号 [
+        on line,
+        boxsep=0pt,
+        left=3pt,
+        right=3pt,
+        top=1.5pt,
+        bottom=1pt,
+        colback=gray!8,
+        colframe=gray!25,
+        arc=4pt,
+        boxrule=0.8pt,
+        fontupper=\ttfamily\normalsize,
+        before upper={\color{black!80}}
+    ]{\texttt{\textbackslash#1}}%
+}
+\usepackage{xeCJK}
+\usepackage{hyperref}
+
+% 设置支持繁简体的字体
+\RequirePackage{caption}
+
+\captionsetup{
+  margin=10.5pt,  
+  font=small,
+  labelfont=bf,
+  labelsep=none,
+  belowskip=10pt,   
+  aboveskip=10pt 
+}
+
+
+\title{LaTeX 测试文档}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{简介}
+这是一个简单的 LaTeX \cite{zhang2020deep}测试文档。
+
+测试不同的引用格式：
+\begin{itemize}
+    \item 数字引用：\cite{zhang2020deep}
+    \item 括号引用：\citep{zhang2020deep}
+    \item 文本内引用：\citet{zhang2020deep}
+    \item 多个引用：\cite{zhang2020deep,knuth1984tex}
+\end{itemize}
+
+\noindent 说明：
+\begin{itemize}
+    \item \texttt{\textbackslash cite} - 数字引用，如 [1]
+    \item \texttt{\textbackslash citep} - 括号引用，如 (张三 等, 2020)
+    \item \texttt{\textbackslash citet} - 文本内引用，如 张三 等 (2020)
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \fbox{\rule{4cm}{3cm}}  % 带边框的方块
+    \caption{测试标题}
+    \label{fig:test}
+\end{figure}
+
+\subsection{数学公式测试}
+行内公式：$E = mc^2$
+
+独立公式：
+\[
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+\]
+
+\subsection{列表测试}
+\begin{itemize}
+    \item 项目一
+    \item 项目二
+    \item 项目三
+\end{itemize}
+
+\section{测试繁简体显示}
+
+正常简体中文：这是一个测试。
+
+包含繁体字：\footnotetext{Shell}（也称为壳层）在计算机科学中指"为用户提供用户界面"的软件，
+通常指的是命令行界面的解析器。
+一般来说，这个词是指操作系统中提供访问内核所提供之服务的程序。
+Shell也用于泛指所有为用户提供操作界面的程序，也就是程序和用户交互的层面。
+因此与之相对的是内核（英语：Kernel），内核不提供和用户的交互功能。
+% 测试不同的URL处理方式：
+
+% 方法1：使用URL编码
+from: \url{https://zh.wikipedia.org/wiki/%e6%ae%bc%e5%b1%a4}
+from: \url{https://zh.wikipedia.org/wiki/壳层}
+
+% 方法2：使用英文URL
+from: \url{https://en.wikipedia.org/wiki/Shell_(computing)}
+
+% 方法3：使用纯文本显示
+from: https://zh.wikipedia.org/wiki/殼層
+
+混合繁简体：这是简体，這是繁體，混合显示测试。
+
+\section{行内代码测试}
+
+这个\latexcmd{RequirePackage\{graphicx\}}是行内代码
+\bibliography{bib/test.bib}
+\end{document}

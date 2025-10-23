@@ -1,0 +1,13 @@
+
+\begin{thenomenclature} 
+\nomgroup{A}
+  \item [{$\alpha$}]\begingroup 角度符号\nomeqref {0}\nompageref{IX}
+  \item [{$\beta$}]\begingroup 系数符号\nomeqref {0}\nompageref{IX}
+  \item [{$\gamma$}]\begingroup 伽马射线符号\nomeqref {0}\nompageref{IX}
+  \item [{$c$}]\begingroup 光速，\SI{3e8}{\meter\per\second}\nomeqref {0}\nompageref{IX}
+  \item [{$E$}]\begingroup 能量，单位：焦耳\nomeqref {0}\nompageref{IX}
+  \item [{$F$}]\begingroup 力，单位：牛顿\nomeqref {0}\nompageref{IX}
+  \item [{$m$}]\begingroup 质量，单位：千克\nomeqref {0}\nompageref{IX}
+  \item [{$v$}]\begingroup 速度，单位：米/秒\nomeqref {0}\nompageref{IX}
+
+\end{thenomenclature}

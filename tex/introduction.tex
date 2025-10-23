@@ -1,49 +1,160 @@
 \chapter{绪论}
 \label{chap:introduction}
 
-\section{研究背景和意义}
-点云(Point Cloud)是一种高效的三维对象表达方式。点云是由一组点构成的集合，每个点由其三维坐标$(x,y,z)$和可能的其他属性（如颜色信息或者法线方向）组成。
-%由于点云能够高效地表示三维空间中的任意形状，所以点云被广泛应用于各个领域。同时，随着深度传感器技术的发展，例如微软的Kinect深度相机、LiDAR 三维扫描仪、光场相机、智能手机搭载的结构光传感器等能够方便地采集三维点云数据，点云数据的应用前景巨大。但同时缺少高效、灵活的点云处理技术，因此，越来越多的点云数据亟待被识别加以利用，将点云处理的结果应用于各种实际应用场景中去，点云识别技术成为了一个具有巨大研究价值和应用前景的学科方向，例如点云的分类、分割技术等是目前活跃的研究课题。点云数据一般被认为是非欧氏数据(Non-Euclidean data)。传统的深度学习技术大多数基于结构化数据，故大多数先前的利用卷积神经网络来对点云进行识别的工作，多将点云数据转化为多视角的二维图像或对点云进行体素化，把点云数据转化为某种规则的结构化数据，再输入网络进行学习。然而，对点云进行这样的转化会产生大量的临时数据并会引入量化误差，所以如让神经网络处理原始点云数据成为了一个研究热点。相较于具有网格结构的欧式数据，点云具有旋转不变性、尺度不变性、顺序不变性、平移不变性等特点\cite{wang2019dynamic}，标准卷积网络无法克服这些问题，所以如何解决点云数据存在的这些问题，成为了将深度学习技术应用于点云识别的一大障碍，同时也是目前几何深度学习（Geometric Learning)的研究热点。
-公式测试：
-\begin{equation}
-	h^{l+1} = \sum_i {e_i - e_j}
-\end{equation}
+本模板是南京理工大学硕士论文的Latex模版。
+为了方便各位同学使用，并根据自身需求添加或修改配置，在模版正文中加入说明。
 
-\begin{equation}
-	max\sum_{i \in \Omega_t^{load} }\sum_{j \in \Omega_t^{FD} }w_{ij,t}x_{ij,t}P_{ij,t}^{La}
-\end{equation}
+\section{相关工作}
 
-内联公式测试$N_i = \{  N_{ij}^{P}\}$
+关于文献引用的模板，已有多位前辈作出了贡献。2011年不知名前辈\cite{2011njust_thesis}发布了模版，
+2015年用户jiec827\cite{jiec827}基于前者和国科大学发布了模版，
+2022年用户JunMa11\cite{2020njust_thesis_PhD}记录了博士毕业之路，
+同时发布了基于jiec827版的Overleaf版本的模版\cite{2020njust_thesis_PhD_overleaf}，
+同年用户packyan\cite{2020njust_thesis_master}发布了新的硕士论文模版，修正了中文引用的格式，并删除了一些无用的文件。
+2024年TingweiWang\cite{2024njust_thesis_overleaf}对JunMa11版的Overleaf模版进行了更新，
+并在CSDN上对此模版进行讨论\cite{2024njust_thesis_csdn}。
 
-\subsection{}
-%\begin{figure}[htbp]
-%\centering
-%\subfigure[心脏电影（一帧）]{
-%\includegraphics[width=2.11in]{img/intro/cine.png}
-%}
-%\subfigure[胸部DCE-MRI（一帧）]{
-%\includegraphics[width=2.11in]{img/intro/breast.png}
-%}
-%\subfigure[心脏灌注（一帧）]{
-%\includegraphics[width=1in]{img/intro/perfusion.png}
-%}
-%\centering
-%\caption{动态MR图像举例。}
-%\label{fig:dynamic}
-%\end{figure}
+\section{快速开始}
 
-\section{本文的主要研究内容和章节安排}
+对于熟悉Latex写作的用户，可遵照下面说明开始：
+\begin{itemize}
+    \item \ilcode{myThesis.tex}：这是总的入口文件，修改该文件管理生成的部分
+    \item \ilcode{sty/custom.tex}：请将所有包和设定放在这个文件
+    \item \ilcode{tex/}：这个文件夹包含所有正文前和正文的tex文件
+\end{itemize}
 
-针对xxx存在的问题，本文提出xxx。
+对于一般用户仅通过修改以上部分就可以实现论文的撰写。
+如果对Latex环境和包的用法不了解的，可阅读本章剩余章节和第\ref{chap:chap2}章。
+对于想要修改样式的用户，可跳转第\ref{chap:chap3}章。
 
-第二章 ...
+\section{编译环境}
+\label{sec:compliment_evn}
 
-第三章 ...
+在进入格式修改和文章的撰写之前，首先需要一个正常编译的环境。
 
-第四章 ...
+\LaTeX 有多个发行版，下面的表格总结了几个发行版的特点，各位可按需选择。
+考虑到学术论文写作的环境，推荐使用TexLive进行撰写，撰写本文时使用的也是TexLive。
 
-第五章，我们对本文的工作进行了总结并给出了下一步工作展望。
+Note: TexLive在MacOS平台上会被安装在各个角落，
+完全卸载\footnote{指消除所有相关文件而不留痕迹}极为困难，
+因此并不推荐在MacOS平台使用TexLive。
 
+\begin{table}[htbp]
+\centering
+\caption{操作系统支持}
+\label{tab:sys_support}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{发行版} & \textbf{平台} & \textbf{大小} & \textbf{更新方式} & \textbf{适合用户} \\
+\midrule
+TeX Live & 全平台 & ~7GB & 年更 & 专业用户、研究者 \\
+MiKTeX & 主要Windows & ~200MB+ & 滚动更新 & Windows用户、初学者 \\
+MacTeX & macOS & ~4.5GB & 年更 & macOS用户 \\
+TinyTeX & 全平台 & ~100MB & 按需 & R用户、轻量用户 \\
+Overleaf & 在线 & - & 自动 & 协作项目、临时使用 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{TexLive环境}
+
+由于网上关于TexLive的安装教程众多，在这里就不多赘述。
+
+在Shell\footnotemark 环境中进行下面操作，
+在Windows上，可用Command Prompt，
+在Limux/MacOS中，可用Terminal。
+
+\footnotetext{Shell（也称为壳层）在计算机科学中指“为用户提供用户界面”的软件，
+通常指的是命令行界面的解析器。
+一般来说，这个词是指操作系统中提供访问内核所提供之服务的程序。
+Shell也用于泛指所有为用户提供操作界面的程序，也就是程序和用户交互的层面。
+因此与之相对的是内核（英语：Kernel），内核不提供和用户的交互功能。
+from: \url{https://zh.wikipedia.org/wiki/\%e6\%ae\%bc\%e5\%b1\%a4}}
+
+\begin{itemize}
+    \item 通过以下方式确认安装正确：
+
+\begin{lstlisting}[style=myshell,caption=系统管理脚本]
+#!/bin/bash
+latex --version
+\end{lstlisting}
+
+    \item 本模版库中有一个测试文件\texttt{test.tex}，可用于测试
+    
+\begin{lstlisting}[style=myshell,caption=基本测试]
+#!/bin/bash
+cd ~/njust_latex
+xelatex test.tex
+\end{lstlisting}
+
+    \item 如果以上测试正确，则测试模版文件
+
+\begin{lstlisting}[style=myshell,caption=模版测试]
+#!/bin/bash
+cd ~/njust_latex
+xelatex myThesis.tex
+\end{lstlisting}
+
+\end{itemize}
+
+\section{文件结构}
+
+本模板项目采用模块化设计，主要文件结构如下：
+
+\begin{itemize}
+
+\item \texttt{myThesis.tex}: 主入口tex文件，包含文档类声明、包引用和内容组织
+\item \texttt{README.MD}: 项目自述文件，包含使用说明和版本信息
+\item \texttt{test.tex}: 基本测试tex文件，用于验证模板功能
+\item \texttt{CHANGELOG.MD}: 项目更新日志文件
+\item \texttt{.latexmkrc}: latexmk配置文件，用于自动化编译
+
+\item \texttt{tex/}: 论文内容目录
+    \begin{itemize}
+        \item \texttt{cover.tex}: 封面页
+        \item \texttt{abstract.tex}: 摘要
+        \item \texttt{introduction.tex}: 引言
+        \item \texttt{chap1.tex}: 第一章（样式设置）
+        \item \texttt{chap2.tex}: 第二章（图形和包说明）
+        \item \texttt{chap3.tex}: 第三章（文献引用）
+        \item \texttt{chap4.tex}: 第四章（用户内容）
+        \item \texttt{future.tex}: 未来工作
+        \item \texttt{thanks.tex}: 致谢
+        \item \texttt{appendix.tex}: 附录
+        \item \texttt{publications.tex}: 发表论文
+        \item \texttt{statement.tex}: 声明
+        \item \texttt{sybolname.tex}: 符号表
+    \end{itemize}
+
+\item \texttt{bib/}: 参考文献目录
+    \begin{itemize}
+        \item \texttt{gbt7714-numerical\_njust.bst}: GBT7714-2015数字引用样式文件（南理工定制版）
+        \item \texttt{myThesisRefs.bib}: 参考文献数据库
+        \item \texttt{test.bib}: 测试用参考文献
+    \end{itemize}
+
+\item \texttt{sty/}: 样式文件目录
+    \begin{itemize}
+        \item \texttt{njustThesis.cls}: 南京理工大学论文文档类
+        \item \texttt{njustThesis.cfg}: 文档类配置文件
+        \item \texttt{commons.sty}: 通用设置包
+        \item \texttt{custom.sty}: 用户自定义命令包
+        \item \texttt{manual.sty}: 手册样式包
+    \end{itemize}
+
+\item \texttt{img/}: 图片资源目录
+    \begin{itemize}
+        \item \texttt{eg\_png.png}: 示例图片
+        \item \texttt{logo/}: 学校标志目录
+            \begin{itemize}
+                \item \texttt{njust\_logo.eps}: 南理工标志
+                \item \texttt{njust\_name.eps}: 南理工名称
+                \item \texttt{njust.eps}: 南理工完整标志
+                \item \texttt{njust-eps-converted-to.pdf}: 转换后的PDF格式标志
+            \end{itemize}
+    \end{itemize}
+
+\end{itemize}
 
 
 

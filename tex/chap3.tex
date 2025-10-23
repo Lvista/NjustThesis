@@ -1,5 +1,180 @@
-\chapter{第三章}
+\chapter{样式设置}
 \label{chap:chap3}
 
+为了方便相关人员对本模版进行调试，同时也为用户提供指引，
+对南京理工论文模版的样式构成和配置进行说明。
+\begin{itemize}
+  \item 带有 \redstar 表示用户需要根据自身需求自定义的部分。
+  \item 带有 \prohibit 表示用户不应该修改的部分
+\end{itemize}
 
 
+本文尽量以《南京理工大学博士、硕士学位论文撰写格式（2014版）》\cite{2014njust_thesis}，
+中的说明顺序对相应的配置进行说明，使用搜索功能对相关代码进行定位。
+
+
+\section{页面布局}
+
+定义：\ilcode{sty/njustThesis.cls >>> page layout}
+
+使用低层参数对页面布局进行设置，每个参数的含义可参考附录A:\ref{appd_A:layout}。
+为了方便，以参数\ilcode{\hoffest}和\ilcode{\voffset}作为正文边界，
+但实质上，正文区域（Body）的上沿到纸上沿距离$D_{topspace}$为：
+
+$D_{topspace}$ = one inch + \ilcode{\voffest} + \ilcode{\topmargin} + 
+\ilcode{\headheight} + \ilcode{\headsep}
+
+为了方便计算，令：
+
+\ilcode{\topmargin} + \ilcode{\headheight} + \ilcode{\headsep} = 0
+
+即：
+
+\ilcode{\topmargin} = -1 * (\ilcode{\headheight} + \ilcode{\headsep})
+
+所以你能看到\ilcode{\topmargin}是取负。
+
+比如在这里，令页眉上沿离纸上沿距离为20mm，而$D_{topspace}$按照规定为30mm，
+则\ilcode{\topmargin}=20-30=-10mm，页眉本体区域高\ilcode{\headheight}=15pt，
+页眉底到正文上沿\ilcode{\headsep}=10mm-15pt=4.7mm，注意单位的转换。
+（$1pt\approx 0.35146mm$）
+
+另外，保留了单双面装订的选择，并使用\ilcode{@twoside}对单双面装订分别进行配置。
+
+\begin{lstlisting}[style=mylatex]
+%% myThesis.tex
+
+%% add oneside option
+\documentclass[UTF8,AutoFakeBold,oneside]{sty/njustThesis}
+\end{lstlisting}
+
+\section{字体和间距}
+
+字体和间距的设置被放置在多个地方，主要分为标题和正文。
+
+\subsection{正文}
+
+定义：\ilcode{njustThesis.cls >>> loadclass infomation}
+
+\ilcode{\zihao}这个选项控制了整个文档的字体基准，同时也是正文字号。
+这里使用正文小四号字体，（\ilcode{\zihao=-4}）具体参考\CTeXlogo 文档中关于字号的说明
+
+
+\subsection{标题}
+定义：\ilcode{sty/njustThesis.cfg >>> the chapter title format}及后面
+
+\begin{itemize}
+    \item \ilcode{\songti}在不同系统对应不同的字库，会有差别，参考\CTeXlogo
+    \item 字号的定义具体参考\CTeXlogo，由于 其中没有四号字体，所以这里直接使用\ilcode{\zihao}
+    \item \ilcode{\beforeskip}和\ilcode{\aftereskip}用于设置前后间距，
+            单位磅就等于pt
+\end{itemize}
+
+\section{页眉和页脚}
+
+定义：\ilcode{sty/njustThesis.cls >>> page setting}
+
+\begin{itemize}
+    \item 使用小五号宋体，注意，从中文摘要开始应用页眉页脚，这也是为何将这一设置放在中文摘要前的原因。
+    \item 通过修改变量\ilcode{\def\NJUST@value@pageDegree}\redstar 修改封面标题和页眉
+\end{itemize}
+
+\section{封面}
+
+定义：\ilcode{tex/cover.tex}\redstar
+
+定义：\ilcode{sty/njustThesis.cls >>> make chinese titlepage}及后续
+
+
+\begin{itemize}
+    \item 按顺序从上到下排列元素，其中下划线使用\ilcode{ulem}包，并自定义命令：
+\end{itemize}
+
+\begin{lstlisting}[style=mylatex]
+%% underline - check if ulem package is loaded
+\@ifpackageloaded{ulem}{}{%
+  \RequirePackage[normalem]{ulem}%
+}
+\def\NJUST@underline[#1]#2{%
+  \uline{\hbox to #1{\hfill#2\hfill}}}
+\def\NJUSTunderline{\@ifnextchar[\NJUST@underline\uline}
+\end{lstlisting}
+
+\begin{itemize}
+    \item “X士学位论文”大标题使用36号标准字体，而不是学校文件要求的32号
+\end{itemize}
+
+\section{声明}
+定义：\ilcode{tex/statment} \prohibit
+
+定义：\ilcode{sty/njustThesis.cls >>> make statement titlepage}
+
+声明来自学校相关文件\cite{2014njust_thesis}，按要求用户不能修改
+
+\section{摘要和关键字}
+
+定义：\ilcode{tex/abstract} \redstar
+
+定义：\ilcode{sty/njustThesis.cls >>> make abstract & keywords}
+
+根据文件要求如下：
+\begin{itemize}
+  \item 一般不用图表、化学结构式和非公知公用的符号和术语
+  \item 硕士学位论文摘要中文字数400\textasciitilde600个字，
+  博士学位论文摘要中文字数800\textasciitilde1000个字
+  \item 关键字一般选取3\textasciitilde8个
+\end{itemize}
+
+\section{目次页}
+
+定义：\ilcode{sty/njustThesis.cls >>> make contents}
+
+通过\ilcode{\tableofcontents}命令生成目录，通过\ilcode{{\Nchapter}}
+命令添加目录
+\begin{lstlisting}[style=mylatex]
+  {\centering \Nchapter{附\NJUSTspace 录 A}}
+\end{lstlisting}
+可选设置
+\begin{itemize}
+  \item \ilcode{\hypersetup{linkcolor=blue}}：设置目录字体色，默认蓝色
+  \item \ilcode{ \vskip 0.0em \@plus\p@}：修改章节间的间隔
+  \item \ilcode{\renewcommand{\@dotsep}{4.5}}：点的间隔
+\end{itemize}
+
+\section{图表目录}
+
+定义：\ilcode{sty/njustThesis.cls >>> figure and table content}
+
+\section{图和表设定}
+
+定义：\ilcode{sty/njustThesis.cls >>> figure and table setting}
+
+\section{正文}
+
+根据要求，
+博士学位论文一般为5～10万字，硕士学位论文一般为3～5万
+
+\section{致谢}
+
+根据要求，可在正文后对下列方面致谢：
+\begin{itemize}
+  \item 对资助或支持学位论文工作的国家科学基金、奖学金基金、合作单位、组织或个人；
+  \item 对指导、协助完成学位论文工作的组织或个人；
+  \item 对在做学位论文工作中提出建议和意见的人；
+  \item 对给予转载和引用权的资料、图片、文献、研究思想和设想的所有者；
+  \item 对其他应感激的组织和个人
+\end{itemize}
+
+\section{参考文献}
+
+关于这部分的说明放在第\ref{chap:chap3}章，
+
+\section{附录}
+
+定义：\ilcode{tex/appendix.tex}\redstar
+
+定义：\ilcode{tex/publication.tex}\redstar
+
+定义：\ilcode{sty/njustThesis.cls >>> 7. appendix}
+
+附录不是必须的，通常把符号说明等放附录A，学术成果放在附录B

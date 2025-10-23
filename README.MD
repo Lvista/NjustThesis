@@ -13,25 +13,35 @@
 
 ## Introdution
 
-This repo is a master thesis latex template for NJUST based on [packyan](https://github.com/packyan/NJUST_Master_Thesis_Latex_Template) version.
+This repository is based on the [packyan](https://github.com/packyan/NJUST_Master_Thesis_Latex_Template) version of the NJUST Master's Thesis LaTeX Template. This project has undergone restructuring and compatibility fixes to the original repository.
+
 
 ## 介绍
 
-该仓库是基于[packyan](https://github.com/packyan/NJUST_Master_Thesis_Latex_Template)版本的南京理工大学硕士论文LaTeX模板。
+该仓库是基于[packyan](https://github.com/packyan/NJUST_Master_Thesis_Latex_Template)版本的南京理工大学硕士论文LaTeX模板。本项目对原仓库进行重构，兼容性修正。
 
 ## 特点
 
 - 支持 Texlive 2025
 - 支持 [GBT-7714 2015](https://github.com/zepinglee/gbt7714-bibtex-style) 
 
+## 主要贡献
+
+- 对[packyan](https://github.com/packyan/NJUST_Master_Thesis_Latex_Template)版本的模板进行重新编排，删去非必须的设置和代码。
+- 创建了用户参考手册，方便用户使用和后续开发。
+
 ## 参考
 
 | 用户名 | 源 |
 |---------|---------|
-|packyan|https://github.com/packyan/NJUST_Master_Thesis_Latex_Template|
-| ucasthesis | https://github.com/mohuangrui/ucasthesis | 
-| latex-njust808 | https://github.com/mohuangrui/ucasthesis |
-| chixindebaoyu | https://github.com/chixindebaoyu |
+|packyan(南理工)|https://github.com/packyan/NJUST_Master_Thesis_Latex_Template|
+|Jiec827(南理工)|https://github.com/jiec827/njustThesis|
+| ucasthesis(国科大) | https://github.com/mohuangrui/ucasthesis | 
+| JunMa11(南理工PhD) | https://github.com/dongwang881107/njustPhDRoad?tab=readme-ov-file |
+| JunMa11(南理工PhD overleaf) | https://www.overleaf.com/read/fkjpqsqsqwvt |
+| Tingwei Wang (南理工)| https://cn.overleaf.com/latex/templates/njustnan-jing-li-gong-da-xue-shuo-shi-bo-shi-lun-wen-mo-ban-2024/cgfknpxrgdfg |
+| zepinglee (GB/T 7714)| https://github.com/zepinglee/gbt7714-bibtex-style?tab=readme-ov-file |
+| NJUST (南理工14年标准)| https://gs.njust.edu.cn/57/08/c13822a87816/page.htm |
 
 ## 历史
 

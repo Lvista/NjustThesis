@@ -3,6 +3,10 @@
 %%%%***************************** version information *********************************
 %%
 %% this is the "commons.sty" package used for configure document styles
+%%
+%% rewritten by Lvista<czc_cn@outlook.com>
+%% $Last-modified: 18 Oct 2025
+%% 
 %% rewritten by Jie Cheng<chengjie0827@gmail.com>
 %% $Last-modified: 08 Jan 2015
 %%
@@ -33,32 +37,51 @@
 %%
 %% Language Setting
 \RequirePackage{ifpdf,ifxetex}
-%% packages and settings depend on PDF mode
-\ifxetex % running xelatex in PDF mode
+%% packages and settings depend on PDF mode∂∂
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%***********************************xelatex****************************************
+\ifxetex % if running xelatex in PDF mode
 %%
 %%% >>> System Font Environment
 %%
 %% If compile by "xelatex", then it support system fonts.
 %% Fonts and tweaks for xelatex:
+\RequirePackage{sty/manual}
 \RequirePackage{fontspec}% fontspec package.
 \defaultfontfeatures{Ligatures=TeX}% use tex style to support LaTeX quoting style.
-%% -- Set English fonts.
-%% Roman, or Serif - typefaces are named for the features at the ends of their strokes
-%% determine \rmfamily, usually for main contents
-%% because of \renewcommand*{\familydefault}{\rmdefault}, it's also determine \normalfont.
-%% examples: Times New Roman, Garamond, Adobe Garamond Pro
-%\setmainfont[BoldFont=Garamond-Bold,ItalicFont=Garamond-Italic]{Garamond}%
-%% Sans serif - typefaces without strokes (without serif) to get high readability
-%% determine \sffamily, usually for signage, headings that demanding high readability
-%% examples: Helvetica, Gill Sans, Futura
+
+%% ==============================================================================
+%% English Font Configuration
+%% ==============================================================================
+
+%% Serif Font (Main Text Font)
+%% Characteristics: Decorative strokes at character ends, optimal for long-form reading
+%% Controls: \rmfamily (roman font family)
+%% Note: Sets the default document font via \renewcommand*{\familydefault}{\rmdefault}
+%% Recommended: Times New Roman, Garamond, Adobe Garamond Pro
+%\setmainfont[
+%    BoldFont    = Garamond-Bold,      % Bold variant
+%    ItalicFont  = Garamond-Italic,    % Italic variant
+%]{Garamond}%
+\setmainfont{Times New Roman}
+
+%% Sans-Serif Font (Heading Font)
+%% Characteristics: Clean strokes without serifs, high readability on screens
+%% Controls: \sffamily (sans-serif font family)  
+%% Usage: Headings, captions, presentations, UI elements
+%% Recommended: Helvetica, Gill Sans, Futura, Arial
 %\setsansfont{Gill Sans MT}%
-%% Monospaced - typefaces that every glyph is the same width (opposed to variable-width fonts).
-%% determine \ttfamily, usually for programming, tabulated data, etc.
-%% examples: Rockwell, Andale Mono, Courier, Monaco
-%\setmonofont{Rockwell}%
+
+%% Monospaced Font (Code Font)
+%% Characteristics: Fixed character width, perfect for vertical alignment
+%% Controls: \ttfamily (typewriter font family)
+%% Usage: Programming code, terminal output, tabular data, technical docs
+%% Recommended: Consolas, Courier New, Monaco, Andale Mono
+%\setmonofont[
+%    Scale = 0.9,           % Font scaling (optional, adjusts line height)
+%]{Consolas}%
+
 \else
 \ifpdf % running pdfTeX in PDF mode
 %%%%% --------------------------------------------------------------------------------
@@ -99,28 +122,34 @@
 %% >>> graphic packages
 %%
 \RequirePackage{graphicx}% graphics packages for including graphics
-\RequirePackage[margin=10.5pt,font=small,labelfont=bf]{caption}% caption options like:[margin=10pt,font=small,labelfont=bf]
-\RequirePackage[section]{placeins}% to prevent floats from being moved over section
-\usepackage{subfigure}% subcaptions for subfigures
-\usepackage{subfigmat}% matrices of similar subfigures, aka small mulitples
-\usepackage{overpic}
-\usepackage{caption}
-\usepackage{mathrsfs}
-\usepackage[sort]{gbt7714}
-\DeclareCaptionLabelSeparator{none}{ }
+%% >>> Caption
+%% Note: Including the caption of figures, codes, table
+\RequirePackage{caption}% caption options
+%% Optional: \captionsetup[#1]{} -- Individual configuration
+%%  - #1: figure, table, lstlisting
 \captionsetup{
-  labelsep=none
+  margin=10.5pt,
+  font=small,
+  labelsep=none,
+  labelfont=bf,
+  belowskip=-10pt
 }
-\captionsetup{belowskip=-10pt}% narrow the skip between caption and main words
+
+\RequirePackage[section]{placeins}% to prevent floats from being moved over section
+\RequirePackage{subcaption}% modern replacement for subfigure - subcaptions for subfigures
+\RequirePackage{overpic}% overlay LaTeX elements on images
+\RequirePackage{mathrsfs}% additional mathematical symbols
+
+\DeclareCaptionLabelSeparator{none}{ }
 \setlength\abovedisplayskip{0pt}% set display skip between equations and main words
 \setlength\belowdisplayskip{0pt}
-%%
+
 %% >>> Page Layout and Line Spacing
 %%
 \RequirePackage{fancyhdr}% fancy headers and footers
 %\RequirePackage{geometry}% page layout
 %\RequirePackage{setspace}% line spacing
-%%
+
 %%% >>> Natural Sciences Citations and References
 %%
 %% if use bibtex citation, not need to use any packages!
@@ -134,9 +163,11 @@
 %\bibliographystyle{GBT7714-2005NLang}% sort as CHN standard 3-type 
 %\bibliographystyle{GBT7714-2005NLang_UP}
 % \bibliographystyle{bib/NJUST_GBT7714-2005NLang_Upp}
-% \bibliographystyle{bib/gbt7714-numerical}
-\bibliographystyle{gbt7714-numerical}
-\setlength{\bibsep}{0.5ex}  % vertical spacing between references
+\RequirePackage{bib/gbt7714_njust}
+\bibliographystyle{bib/gbt7714-numerical_njust}
+\citestyle{super}
+% \bibliographystyle{bib/gbt7714-numerical_njust}
+% \setlength{\bibsep}{0.5ex}  % vertical spacing between references
 %%
 %%% >>> Verbatim
 %%
@@ -163,12 +194,12 @@
 %\RequirePackage{ctable}%
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{algorithm}
-\usepackage{algorithmic}
 %%
 %% >>> Math packages
 %%
 \RequirePackage{amsmath,amssymb,amstext}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 %%
 %% >>> hyperref packages
 %%

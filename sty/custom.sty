@@ -1,144 +1,161 @@
 %%%%% --------------------------------------------------------------------------------
 %%
 %%%%***************************** version information *********************************
-%%
 %% this is the "custom.sty" package used for configure document styles
-%% rewritten by Jie Cheng<chengjie0827@gmail.com>
-%% $Last-modified: 08 Jan 2015
+%%
+%%   rewritten by Lvista<czc_cn@outlook.com>
+%%   $Last-modified: 23 Oct 2025
+
+%%   rewritten by Jie Cheng<chengjie0827@gmail.com>
+%%.  $Last-modified: 08 Jan 2015
 %%
 %% This program can be redistributed and/or modified under the terms
 %% of the GNU Public License, version 2.
-%%
-%% This fork was created to satisfy personal taste in code.
-%%
+
+%%***************************** Header Start *********************************
+%% If you don't know what this is, please don't modify it
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesPackage{sty/custom}
- [2015/01/05 v0.1 commons 
- macros package]
-%%%%% --------------------------------------------------------------------------------
-%%
-%%%%********************************Declare Options**********************************
-%%
-%% end-user parameters, each option is declared by one declare option command
-\DeclareOption*{% handle non-implemented options
-    \PackageWarning{custom}{Unknown option '\CurrentOption'}%
+\ProvidesPackage{sty/custom}[2015/01/05 v0.1 commons macros package]
+\DeclareOption*{
+\PackageWarning{custom}{Unknown option '\CurrentOption'}
 }
-%% terminates all options processing
 \ProcessOptions\relax
-%%%%% --------------------------------------------------------------------------------
-%%
-%%%%***************************User Defined Command***********************************
-%%
-%%% >>> Math
-%%
+%%***************************** Header End *********************************
 
-\newcommand{\ds}{\displaystyle}% short command for displaystyle
-\newcommand{\ve}{\varepsilon}% short command for epsilon
-\newcommand{\der}[2]{\frac{d #1}{d #2}}% short command for derivative
-\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}% short command for pde
-\newcommand{\argmin}{\operatornamewithlimits{arg\ min}}
-\newcommand{\prox}{\mathrm{prox}}
-\newcommand{\project}{\mathrm{project}}
-\newcommand{\cccve}{CCC\{$v_\mathrm{e}$\}}
-\newcommand{\ccckt}{CCC\{$K^\mathrm{trans}$\}}
-\newcommand{\kt}{$K^\mathrm{trans}$}
-\newcommand{\Ve}{$v_\mathrm{e}$}
-\newcommand{\beq}{\begin{equation}}
-\newcommand{\eeq}{\end{equation}}
-\usepackage{diagbox}
+%%***************************** Manual Start *********************************
+%% input `manual.sty`
+%% This part is for manual, such as the display function of inline code.
+%% Therefore, you can comment out this part
+\RequirePackage{sty/manual}
+%%***************************** Manual End *********************************
 
-\floatname{algorithm}{算法}  
-\renewcommand{\algorithmicrequire}{\textbf{初始化：}}  
-\renewcommand{\algorithmicensure}{\textbf{直到收敛，返回}}
-%\renewcommand{\algorithmicrepeat}{\textbf{迭代，根据以下步骤更新：}}
-\newcommand{\INDSTATE}[1][1]{\STATE\hspace{#1\algorithmicindent}}
+%%************ User Start ********************
+%% >>> Font
+\RequirePackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}                   % English font
+% \setCJKmainfont{SimSun}[BoldFont=SimHei]      % 正文字体
+% \setCJKsansfont{Microsoft YaHei}              % 无衬线字体
+% \setCJKmonofont{NSimSun} 
 
-\DeclareMathOperator*{\argmax}{arg\,max}
+%% >>> Floats (figure, table, listing, algorithm)
+\RequirePackage[section]{placeins}    % to prevent floats from being moved over section
 
-\newcommand{\myvec}[1]{\vec{#1}}% vector style
-%%
-%%% >>> Graphic Length Factor
-%%
-\newcommand*{\MyFactor}{0.8}% for single figure
-\newcommand*{\MySubFactor}{0.48}% for subfigure
-%%%%% --------------------------------------------------------------------------------
-%%
-%%%%*****************************User Configuration***********************************
-%%
-%%
-%%% >>> Space and Skip
-%%
-%% Set line space in whole document by \linespread:
-%\linespread{1.3}% 1.3 for "one and a half" line spacing, and 1.6 for "double" line spacing
-%% skip distance for paragraphs
-%\setlength{\parskip}{0.5ex plus 0.25ex minus 0.25ex}% vertical space before a paragraph.
-%%
-%%%>>> chapter section
-% \usepackage{titlesec}
-% \titlespacing*{\chapter} {0pt}{-5pt}{18pt}
-% \titlespacing*{\section} {0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-% \titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-% \titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-%%
-%%%>>> enumitem
-\usepackage{enumitem}
-\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=3.0pt}
-\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=3.0pt}
-\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=3.0pt}
-%%
-%%% >>> Toc Style
-%%
-\setcounter{tocdepth}{2}% specifies what depth to take the Table of Contents to.
-\setcounter{secnumdepth}{3}% the depth for section numbering occurs, default is 2(subsub).
+%% >>> Graphic (figure)
+\RequirePackage{graphicx}
+\RequirePackage{subcaption}           % modern replacement for subfigure
+\RequirePackage{overpic}              % overlay LaTeX elements on images
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
 
-%\theoremstyle{definition}
-%\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
-%\newtheorem{exmp}[thm]{Example} % same for example numbers
-%\newtheorem{theorem}{Theorem}
-%\newtheorem{claim}[theorem]{Claim}
-%\newtheorem{proposition}[theorem]{Proposition}
-%\newtheorem{lemma}[theorem]{Lemma}
-%\newtheorem{corollary}[theorem]{Corollary}
-%\newtheorem{conjecture}[theorem]{Conjecture}
-%\newtheorem*{observation}{Observation}
-%\newtheorem*{example}{Example}
-%\newtheorem*{remark}{Remark}
+%% >>> Caption
+%% Note: Including the caption of figures, codes, table
+\RequirePackage{caption}
+\captionsetup[figure]{
+    skip = 1pt,          
+    % belowskip = 5pt,     
+    % aboveskip = 5pt      
+}
+\captionsetup[table]{
+    skip = 1pt,
+    % belowskip = 5pt,
+    % aboveskip = 5pt
+}
 
-\newtheoremstyle{break}% name
-  {}%      Space above, empty = `usual value'
-  {}%      Space below
-  {\itshape}% Body font
-  {}%         Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}% Thm head font
-  {.}%        Punctuation after thm head
-  {\newline}% Space after thm head: \newline = linebreak
-  {}%         Thm head spec
-%%
-%%% >>> Grouping Figure/Equation Numbering by Section, Numberwithin.
-%%
-%% For long documents the numbering can become cumbersome as the numbers
-%% reach into double and triple digits. To reset the counters at the
-%% start of each section and prefix the numbers by the section number
-%% include the following in the preamble.
-%% The same can be done with similar counter types and document units such as "subsection".
-%%
-%% Get enumeration at the section level:
-%\numberwithin{equation}{section}
-%\renewcommand{\theequation}{\thesection\arabic{equation}}% configure the label style.
-%\numberwithin{figure}{section}
-%\renewcommand{\thefigure}{\thesection\arabic{equation}}% configure the label style.
-%%
-%% Get enumeration at the subsection level:
-%\numberwithin{equation}{subsection}
-%\renewcommand{\theequation}{\thesubsection\arabic{equation}}% configure the label style.
-%\numberwithin{figure}{subsection}
-%\renewcommand{\thefigure}{\thesubsection\arabic{equation}}% configure the label style.
-%%
-%%% >>> URL Style
-%%
-%% By default, URLs are printed using mono-spaced fonts. If you don't like it and
-%% you want them to be printed with the same style of the rest of the text, you can use this:
-%\urlstyle{same}
+%% >>> Math, Algorithm and other science packages
+\RequirePackage{mathrsfs}
+\RequirePackage{siunitx}
+\RequirePackage{chemformula}
+\RequirePackage{physics}
+\RequirePackage{amsmath,amssymb,amstext}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+
+
+%% >>> Math >>> equations
+\setlength\abovedisplayskip{0pt}% set display skip between equations and main words
+\setlength\belowdisplayskip{0pt}
+
+%% >>> Table
+\RequirePackage{multirow}
+
+%% >>> Hyperlink
+\hypersetup{
+    pdffitwindow=false,
+    pdfstartview={FitH},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=black,
+    filecolor=blue,
+    urlcolor=blue
+}
+
+%% >>> Code Space
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+%% Shell
+\lstdefinestyle{myshell}{
+    language=[LaTeX]TeX,
+    basicstyle=\ttfamily\small,
+    numbers=left,
+    frame=single,
+    backgroundcolor=\color{gray!3},
+    breaklines=true,
+    captionpos=b,
+    showstringspaces=false,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},
+    morecomment=[l][\color{green!50!black}]{\%},
+    linewidth=\textwidth,
+    xleftmargin=0.05\textwidth,
+    xrightmargin=0.05\textwidth
+}
+%% Latex
+\lstdefinestyle{mylatex}{
+    language=[LaTeX]TeX,
+    basicstyle=\ttfamily\small,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    breaklines=true,
+    captionpos=b,
+    showstringspaces=false,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{orange},
+    morecomment=[l][\color{green!60!black}]{\%},
+    morekeywords={documentclass, usepackage, begin, end, chapter, section, subsection, caption, label, ref, cite, includegraphics, title, author, date},
+    morekeywords=[2]{article, book, report, beamer, graphicx, amsmath, hyperref, geometry, fancyhdr},
+    keywordstyle=[2]\color{purple},
+    linewidth=\textwidth,
+    xleftmargin=0.05\textwidth,
+    xrightmargin=0.05\textwidth
+}
+%% Python
+\lstdefinestyle{mypython}{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    breaklines=true,
+    captionpos=b,
+    linewidth=\textwidth,
+    xleftmargin=0.05\textwidth,
+    xrightmargin=0.05\textwidth
+}
+
+
+%% >>> Bibliography
+\RequirePackage{gbt7714}
+\bibliographystyle{bib/gbt7714-numerical_njust}
+\citestyle{super}
+\setlength{\bibsep}{0.5ex}
+\RequirePackage{booktabs}
+%%************ User End ********************
 %%%%% --------------------------------------------------------------------------------
 \endinput
 %% End of custom.sty

@@ -1,23 +1,367 @@
-
-\chapter{第二章}
+\chapter{包使用参考}
 \label{chap:chap2}
 
-\section{模型的提出}
-\section{模型的离散化和算法}
-\section{数值实验数据与评价方法}
-\section{数值实验结果}
-\section{本章小结}
+\section{LaTeX包简要说明}
+\label{sec:package_description}
 
+本节简要介绍\ilcode{sty/custom.sty}模板中使用的主要LaTeX包及其功能。
 
+\subsection{字体和排版包}
 
+\begin{itemize}
+    \item \ilcode{fontspec}: XeLaTeX字体选择包，支持系统字体和OpenType特性
+    \item \ilcode{siunitx}: 科学单位包，用于正确排版物理量和单位
+    \item \ilcode{physics}: 物理符号包，提供常用物理符号和运算符
+\end{itemize}
 
+\subsection{数学和科学包}
 
+\begin{itemize}
+    \item \ilcode{amsmath, amssymb, amstext}: AMS数学包套件，提供高级数学功能
+    \item \ilcode{mathrsfs}: 数学花体字体包
+    \item \ilcode{chemformula}: 化学公式包，用于排版化学方程式
+    \item \ilcode{algorithm, algpseudocode}: 算法排版包，用于伪代码和算法描述
+\end{itemize}
 
+\subsection{图形和表格包}
 
+\begin{itemize}
+    \item \ilcode{graphicx}: 图形插入包，支持多种图像格式
+    \item \ilcode{subcaption}: 子图包，用于创建子图和图形矩阵
+    \item \ilcode{overpic}: 图像叠加包，可在图像上叠加LaTeX元素
+    \item \ilcode{multirow}: 表格多行包，用于复杂表格排版
+    \item \ilcode{booktabs}: 专业表格包，提供高质量表格线条
+\end{itemize}
 
+\subsection{代码和列表包}
 
+\begin{itemize}
+    \item \ilcode{listings}: 代码高亮包，支持多种编程语言
+    \item \ilcode{xcolor}: 颜色包，提供颜色定义和文本着色
+\end{itemize}
 
+\subsection{超链接和引用包}
 
+\begin{itemize}
+    \item \ilcode{hyperref}: 超链接包，提供PDF内部链接和书签
+    \item \ilcode{gbt7714}: 中文参考文献包，符合GB/T 7714-2015标准
+\end{itemize}
+
+\subsection{浮动体和标题包}
+
+\begin{itemize}
+    \item \ilcode{placeins}: 浮动体控制包，防止浮动体跨越章节
+    \item \ilcode{caption}: 标题包，自定义图表标题格式
+\end{itemize}
+
+\subsection{包配置说明}
+
+\section{数学公式}
+\label{sec:mathematics}
+
+这里是一些公式使用参考
+
+\subsection{基础数学公式}
+
+行内公式：爱因斯坦质能方程 $E = mc^2$，薛定谔方程 $\hat{H}\psi = E\psi$。
+
+显示公式：
+\begin{equation}
+    \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
+\end{equation}
+
+麦克斯韦方程组：
+\begin{align}
+    \nabla \cdot \mathbf{E} &= \frac{\rho}{\varepsilon_0} \\
+    \nabla \cdot \mathbf{B} &= 0 \\
+    \nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \\
+    \nabla \times \mathbf{B} &= \mu_0\mathbf{J} + \mu_0\varepsilon_0\frac{\partial \mathbf{E}}{\partial t}
+\end{align}
+
+\subsection{复杂数学表达式}
+
+傅里叶变换：
+\begin{equation}
+    \mathcal{F}\{f(t)\} = F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt
+\end{equation}
+
+矩阵运算：
+\begin{equation}
+    \mathbf{A} = \begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{m1} & a_{m2} & \cdots & a_{mn}
+    \end{bmatrix}, \quad
+    \det(\mathbf{A}) = \sum_{\sigma \in S_n} \operatorname{sgn}(\sigma) \prod_{i=1}^n a_{i,\sigma(i)}
+\end{equation}
+
+\clearpage
+\section{算法描述}
+\label{sec:algorithms}
+
+\begin{algorithm}
+\caption{梯度下降算法}
+\label{alg:gradient_descent}
+\begin{algorithmic}[1]
+\Require 学习率 $\eta$，最大迭代次数 $T$，目标函数 $f(\mathbf{x})$
+\Ensure 最优解 $\mathbf{x}^*$
+\State 初始化 $\mathbf{x}_0$ 和 $t \leftarrow 0$
+\While{$t < T$ \textbf{and} $\|\nabla f(\mathbf{x}_t)\| > \epsilon$}
+    \State 计算梯度 $\mathbf{g}_t \leftarrow \nabla f(\mathbf{x}_t)$
+    \State 更新参数 $\mathbf{x}_{t+1} \leftarrow \mathbf{x}_t - \eta \mathbf{g}_t$
+    \State $t \leftarrow t + 1$
+\EndWhile
+\State \Return $\mathbf{x}_t$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{K-均值聚类算法}
+\label{alg:kmeans}
+\begin{algorithmic}[1]
+\Require 数据集 $X = \{\mathbf{x}_1, \ldots, \mathbf{x}_n\}$，聚类数 $k$
+\Ensure 聚类中心 $C = \{\mathbf{c}_1, \ldots, \mathbf{c}_k\}$，簇分配
+\State 随机初始化聚类中心 $C^{(0)}$
+\State $t \leftarrow 0$
+\Repeat
+    \For{$i = 1$ \textbf{to} $n$}
+        \State $z_i \leftarrow \arg\min_j \|\mathbf{x}_i - \mathbf{c}_j^{(t)}\|^2$
+    \EndFor
+    \For{$j = 1$ \textbf{to} $k$}
+        \State $\mathbf{c}_j^{(t+1)} \leftarrow \frac{1}{|S_j|} \sum_{\mathbf{x} \in S_j} \mathbf{x}$
+    \EndFor
+    \State $t \leftarrow t + 1$
+\Until{收敛}
+\State \Return $C^{(t)}$, $\{z_i\}$
+\end{algorithmic}
+\end{algorithm}
+
+\clearpage
+\section{表格设计}
+\label{sec:tables}
+
+\subsection{基础表格}
+
+\begin{table}[htbp]
+\centering
+\caption{实验数据汇总}
+\label{tab:experiment_data}
+\begin{tabular}{lccc}
+\toprule
+\textbf{样本} & \textbf{温度 (\si{\celsius})} & \textbf{压力 (\si{\pascal})} & \textbf{产率 (\%)} \\
+\midrule
+A & 25.0 & 101325 & 85.2 \\
+B & 30.5 & 102100 & 88.7 \\
+C & 35.2 & 100950 & 82.1 \\
+D & 40.1 & 101800 & 91.5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{复杂表格}
+
+\begin{table}[htbp]
+\centering
+\caption{材料性能比较}
+\label{tab:materials}
+\begin{tabular}{lcccc}
+\toprule
+\multirow{2}{*}{\textbf{材料}} & \multicolumn{2}{c}{\textbf{力学性能}} & \multicolumn{2}{c}{\textbf{热学性能}} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+ & 强度 (\si{\mega\pascal}) & 模量 (\si{\giga\pascal}) & 导热率 (\si{\watt\per\meter\per\kelvin}) & 膨胀系数 (\si{\per\kelvin}) \\
+\midrule
+钢 & 250 & 200 & 50 & 1.2e-5 \\
+铝 & 90 & 70 & 237 & 2.3e-5 \\
+钛 & 240 & 110 & 22 & 8.6e-6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{化学方程式}
+\label{sec:chemistry}
+
+化学反应：
+\begin{equation}
+    \ch{2 H2 + O2 -> 2 H2O} \quad \Delta H = \SI{-285.8}{\kilo\joule\per\mole}
+\end{equation}
+
+酸碱中和反应：
+\begin{equation}
+    \ch{HCl + NaOH -> NaCl + H2O}
+\end{equation}
+
+氧化还原反应：
+\begin{equation}
+    \ch{2 Al + Fe2O3 -> Al2O3 + 2 Fe}
+\end{equation}
+
+\section{代码列表}
+\label{sec:code}
+
+\subsection{Python 科学计算代码}
+
+\begin{lstlisting}[style=mypython,caption=数值积分计算, label=code:integration]
+import numpy as np
+from scipy import integrate
+
+def monte_carlo_integration(f, a, b, num_samples=10000):
+    """蒙特卡洛积分方法"""
+    x_random = np.random.uniform(a, b, num_samples)
+    f_values = f(x_random)
+    integral = (b - a) * np.mean(f_values)
+    return integral
+
+# 示例：计算正弦函数在[0, π]上的积分
+result = monte_carlo_integration(np.sin, 0, np.pi)
+print(f"积分结果: {result}")
+\end{lstlisting}
+
+\subsection{数据可视化代码}
+
+\begin{lstlisting}[style=mypython, caption=科学数据可视化, label=code:visualization]
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 生成数据
+x = np.linspace(0, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+# 创建图表
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+
+# 第一个子图
+ax1.plot(x, y1, 'b-', label='sin(x)')
+ax1.plot(x, y2, 'r--', label='cos(x)')
+ax1.set_xlabel('x')
+ax1.set_ylabel('y')
+ax1.legend()
+ax1.grid(True)
+
+# 第二个子图：散点图
+x_scatter = np.random.normal(0, 1, 100)
+y_scatter = np.random.normal(0, 1, 100)
+ax2.scatter(x_scatter, y_scatter, alpha=0.6)
+ax2.set_xlabel('X')
+ax2.set_ylabel('Y')
+
+plt.tight_layout()
+plt.savefig('scientific_plot.png', dpi=300)
+plt.show()
+\end{lstlisting}
+
+\section{物理公式和符号}
+\label{sec:physics}
+
+本节展示符号表中定义符号的使用示例。根据符号表定义，我们使用以下符号：
+
+量子力学算符：
+\begin{equation}
+    \hat{p} = -i\hbar \frac{\partial}{\partial x}, \quad
+    [\hat{x}, \hat{p}] = i\hbar
+\end{equation}
+
+相对论能量动量关系，其中$E$表示能量，$c$表示光速：
+\begin{equation}
+    E^2 = (pc)^2 + (m_0 c^2)^2
+\end{equation}
+
+牛顿第二定律，其中$F$表示力，$m$表示质量，$v$表示速度：
+\begin{equation}
+    F = m \frac{dv}{dt}
+\end{equation}
+
+角度相关的三角函数关系，其中$\alpha$和$\beta$为角度符号：
+\begin{equation}
+    \sin(\alpha + \beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta
+\end{equation}
+
+伽马射线衰减公式，其中$\gamma$表示伽马射线符号：
+\begin{equation}
+    I = I_0 e^{-\mu x}
+\end{equation}
+其中$I_0$为初始强度，$\mu$为衰减系数，$x$为穿透距离。
+
+热力学基本关系：
+\begin{equation}
+    \dd U = T \dd S - P \dd V + \sum_i \mu_i \dd N_i
+\end{equation}
+
+\section{图片}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/eg_png.png}
+    \caption{示例图片}
+    \label{fig:example}
+\end{figure}
+位置：\ilcode{sty/custom.sty >>> Graphic (figure)}
+\begin{itemize}
+    \item \ilcode{\RequirePackage{graphicx}}: 图像基本类，调用方法如下
+\begin{lstlisting}[style=mylatex]
+%% 单图
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/eg_png.png}
+    \caption{示例图片}
+    \label{fig:example}
+\end{figure}
+\end{lstlisting}
+    \item \ilcode{\RequirePackage{subcaption}}: 现代的子图包，用于创建子图
+\begin{lstlisting}[style=mylatex]
+%% 子图
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{img/sub1.png}
+        \caption{子图1}
+        \label{fig:sub1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{img/sub2.png}
+        \caption{子图2}
+        \label{fig:sub2}
+    \end{subfigure}
+    \caption{包含两个子图的示例}
+    \label{fig:subfigures}
+\end{figure}
+%% 图形矩阵
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{img/matrix1.png}
+        \caption{图1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{img/matrix2.png}
+        \caption{图2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{img/matrix3.png}
+        \caption{图3}
+    \end{subfigure}
+    \caption{3×1图形矩阵示例}
+    \label{fig:subfigmat}
+\end{figure}
+\end{lstlisting}
+    \item \ilcode{\RequirePackage{overpic}}: 在图像上叠加LaTeX元素
+\begin{lstlisting}[style=myshell]
+%% 图上叠加文本
+\begin{figure}[htbp]
+    \centering
+    \begin{overpic}[width=0.8\textwidth]{img/background.png}
+        \put(50,50){\textcolor{red}{\Large 叠加文本}}
+        \put(100,100){\textcolor{blue}{\Large 坐标(100,100)}}
+    \end{overpic}
+    \caption{在图像上叠加LaTeX元素}
+    \label{fig:overpic}
+\end{figure}
+\end{lstlisting}
+    \item \ilcode{\DeclareGraphicsExtensions{.pdf,.png,.jpg}}: 声明支持的图像格式
+\end{itemize}
 
 
 

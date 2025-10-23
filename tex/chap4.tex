@@ -1,47 +1,158 @@
-\chapter{基于xxx的xxxx实现}
+\chapter{文献的引用}
 \label{chap:chap4}
-模式识别是将采集到的指纹数据和字典进行匹配，Ma等\cite{mrf}使用了模板匹配的方法来进行参数图的重建。记$X=\{x_n\in \mathbb{C}^L\}, n=1,...,N$为采集到的指纹数据，$\mathcal{D}=\{d_k\in \mathbb{C}^L\},k=1,...,K$为生成的字典。那么模板匹配即为从从字典$\mathcal{D}$中选取和$x_n$内积最大的元素：
-	\begin{equation}
-	\hat{k}_n = \argmax_k \left|\left\langle \mathbf{d}_k,\mathbf{x}_n \right\rangle \right|.
-	\end{equation}
-并且质子密度也可以同时计算：
-	\begin{equation}
-	\hat{\rho}_n=\left|\langle \mathbf{d}_{\hat{k}_n},\mathbf{x}_n \rangle\right|.
-	\end{equation}
 
-\begin{algorithm}
-	\caption{snapMRF生成字典与匹配详细流程。}
-	\label{alg:snapMRF}
-	\begin{algorithmic}
-		\INDSTATE[-1.25] \textbf{输入：}\texttt{*d\_mrf}，\texttt{*d\_params}，\texttt{*d\_img}
-		\INDSTATE[-1.25] \textbf{输出：}\texttt{*d\_atoms}，\texttt{*d\_maps}
-		\STATE 01：从CSV文件中读取MRF序列信息，存入\texttt{*d\_mrf}；
-		\STATE 02：从命令行输入字典参数信息，存入\texttt{*d\_params}；
-		\STATE 03：初始化状态矩阵\texttt{*d\_w}；
-		\STATE 04：\textbf{迭代}：从第1个时刻到第$L$个时刻，并行计算所有体素的信号
-		\STATE 05：\qquad 使用函数\texttt{fill\_transition\_matrix()}构造转移矩阵$T$；
-		\STATE 06：\qquad 使用函数\texttt{apply\_rf\_pulse()}将射频场作用在\texttt{*d\_w}上；
-		\STATE 07：\qquad 使用函数\texttt{decay\_signal()}将$T_1$和$T_2$衰减作用在\texttt{*d\_w}上；
-		\STATE 08：\qquad 使用函数\texttt{save\_atoms()}将原子的信号保存在\texttt{*d\_atoms}中；
-		\STATE 09：\qquad 使用函数\texttt{dephase\_gradients()}将梯度场作用在\texttt{*d\_w}上；
-		\STATE 10：\qquad 使用函数\texttt{decay\_signal()}将$T_1$和$T_2$衰减作用在\texttt{*d\_w}上；
-		\STATE 11：\textbf{终止迭代}；
-		\STATE 12：释放\texttt{*d\_w}；
-		\STATE 13：从RawArray文件中读取指纹数据，存入\texttt{*d\_img}；
-		\STATE 14：计算剩余显存大小，并根据剩余显存，将\texttt{*d\_img}分为$G$组；
-		\STATE 15：\textbf{迭代}：从第1组到第$G$组，在每一组内并行计算所有体素的参数
-		\STATE 16：\qquad 使用函数\texttt{MRF\_minimatch()}进行匹配；
-		\STATE 17：\qquad 使用函数\texttt{generate\_maps()}生成参数图；
-		\STATE 18：\textbf{终止迭代}；
-		\STATE 19：将\texttt{*d\_atoms}和\texttt{*d\_maps}保存为RawArray文件；
-		\STATE 20：释放所有显存和内存。
-	\end{algorithmic}
-\end{algorithm}
+本项目基于packyan\cite{2020njust_thesis_master}的项目，
+采用zepinglee\cite{2025zepinglee}的项目提供GB/T 7714—2015文献引用宏包，
+根据《南京理工大学博士、硕士学位论文撰写格式（2014版）》\cite{2014njust_thesis}，\\
+对\ilcode{gbt7714-numerical.bst}进行调整，
+并创建名为\ilcode{gbt7714-numerical_njust.bst}的文件。
+所做的修改日志放在了\ilcode{CHANGELOG.MD}中。
 
-\newpage
-翻页测试，左上角章节。
+在\ilcode{bib/}文件夹中保留了修改前的\ilcode{gbt7714-numerical.bst}
+文件，方便进行调试。
+未来考虑更好的更新方式以方便与zepinglee\cite{2025zepinglee}仓库 保持同步更新。
 
 
+\section{文献引用测试}
+\label{sec:chinese_citations}
+
+为了测试中文文献的引用效果，本节将展示各种类型的文献引用。
+在2014版的标准中，仅对论文类和著作类进行了规定，其余按照
+GBT7714-2015\cite{gbt7714-2015}进行调整。表\ref{table:bib_keyword}
+来自zepinglee\cite{2025zepinglee}仓库，其中带 “*” 的类型不是 BibTeX 的标准文献类型。
+
+\begin{table}[htbp]
+\centering
+\caption{文献类型与BibTeX条目类型对照}
+\label{table:bib_keyword}
+\begin{tabular}{lll}
+\hline
+文献类型 & 标识代码 & Entry Type \\
+\hline
+普通图书 & M & \ilcode{@book} \\
+图书的析出文献 & M & \ilcode{@incollection} \\
+会议录 & C & \ilcode{@proceedings} \\
+会议录的析出文献 & C & \ilcode{@inproceedings} 或 \ilcode{@conference} \\
+汇编 & G & \ilcode{@collection}$^*$ \\
+报纸 & N & \ilcode{@newspaper}$^*$ \\
+期刊的析出文献 & J & \ilcode{@article} \\
+学位论文 & D & \ilcode{@mastersthesis} 或 \ilcode{@phdthesis} \\
+报告 & R & \ilcode{@techreport} \\
+标准 & S & \ilcode{@standard}$^*$ \\
+专利 & P & \ilcode{@patent}$^*$ \\
+数据库 & DB & \ilcode{@database}$^*$ \\
+计算机程序 & CP & \ilcode{@software}$^*$ \\
+电子公告 & EB & \ilcode{@online}$^*$ \\
+档案 & A & \ilcode{@archive}$^*$ \\
+舆图 & CM & \ilcode{@map}$^*$ \\
+数据集 & DS & \ilcode{@dataset}$^*$ \\
+其他 & Z & \ilcode{@misc} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{期刊文章引用}
+
+根据论文类编排内容及顺序一节，应该遵从：
+
+序号.作者姓名.论文题名[J].杂志名.出版年份（期）：论文所在页码
+
+例：曹希仁. 离散事件动态系统[J]. 自动化学报. 1985（4）：438-446\cite{850419}
+
+Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need[J]. Advances in neural
+information processing systems, 2017, 30.\cite{vaswani2017attention}
+
+\subsection{图书引用}
+
+根据著作类编排中内容及顺序一节，应该遵从：
+
+序号.作者姓名.书名[M].版本.出版地：出版者，出版年
+
+例：
+
+严士健. 测试与概率[M]. 第1版. 北京:北京师范大学出版社, 1994\cite{严士健2003测度与概率}
+
+Morton L T. Use of medical literature[M]. 2nd ed. London: Butter-worths, 1977\cite{morton1977use}
+
+\subsection{会议论文引用}
 
 
+例：
 
+人工智能技术在智能制造领域的应用研究日益深入\cite{wang2021ai}。
+相关研究成果为工业4.0的实现提供了技术支撑。
+
+Machine learning algorithms have shown significant improvements in natural language processing tasks\cite{smith2021nlp}。
+These advances have opened new possibilities for automated text analysis.
+
+\subsection{学位论文引用}
+
+
+例：
+
+基于深度学习的图像识别算法研究\cite{liu2020thesis}为计算机视觉领域
+提供了新的解决方案。
+
+Advanced neural network architectures for computer vision applications\cite{johnson2020thesis} have demonstrated remarkable performance improvements in object detection tasks.
+
+\subsection{专利引用}
+
+
+例：
+
+神经网络在图像处理方面的专利技术\cite{patent2021cn}展示了
+人工智能技术在知识产权保护方面的重要性。
+
+Novel machine learning algorithms for autonomous vehicle navigation\cite{patent2021us} represent significant advances in transportation technology.
+
+\subsection{技术报告引用}
+
+
+例：
+
+人工智能技术的发展现状和趋势在相关报告中得到了详细分析\cite{report2021}。
+
+Comprehensive analysis of quantum computing applications in cryptography\cite{report2021quantum} provides insights into future security challenges.
+
+\subsection{标准引用}
+
+
+例：
+
+人工智能术语的标准化工作\cite{standard2020}为行业发展提供了规范基础。
+
+International standards for data privacy and security\cite{iso2021privacy} establish guidelines for protecting sensitive information in digital systems.
+
+\subsection{报纸文章引用}
+
+
+例：
+
+人工智能技术在制造业转型升级中的作用\cite{newspaper2021}得到了广泛关注。
+
+Breakthrough in renewable energy storage technology\cite{newspaper2021energy} has attracted significant attention from industry leaders and policymakers.
+
+
+\subsection{电子资源引用}
+
+例：
+
+在线资源为研究者提供了便捷的信息获取渠道\cite{online2021}。
+
+Open-source software repositories\cite{github2021ml} provide valuable resources for machine learning researchers and practitioners worldwide.
+
+\subsection{论文集引用}
+
+例：
+
+人工智能前沿技术的研究成果\cite{collection2020}汇集了该领域的最新进展。
+
+Recent advances in computational biology\cite{collection2021bio} demonstrate the interdisciplinary nature of modern scientific research.
+
+\subsection{手册引用}
+
+例：
+
+深度学习框架的使用手册\cite{manual2021}为开发者提供了详细的技术指导。
+
+Comprehensive user guide for distributed computing systems\cite{manual2021distributed} offers practical implementation strategies for large-scale applications.

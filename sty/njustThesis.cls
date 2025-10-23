@@ -1,5 +1,8 @@
 %%%%% ------------------------------------------------------------------------------------------
 %%
+%%     modified by Lvista<czc_cn@outlook.com>
+%%     $Last-modified: 23 Oct 2025
+
 %%     This is file `njustThesis.cls',
 %%     This file was recreated by Jie Cheng from 'ucasthesis.cls' Ref [1, 2]
 %%
@@ -53,16 +56,17 @@
 %%
 %%%%*************************** loadclass infomation ************************************
 %%
-\LoadClass[cs4size,a4paper,fancyhdr,fntef,hyperref,UTF8]{ctexbook}[2015/03/15]
+\LoadClass[cs4size,a4paper,fancyhdr,fntef,hyperref,UTF8,zihao=-4]{ctexbook}[2025/10/22]
 %%%%% ------------------------------------------------------------------------------------------
 %%
 %%%%***************************** package infomation ***********************************
 %%
-%% font
+%% font and title 
+\RequirePackage{fontspec,indentfirst}
 %% math packages
 \RequirePackage{mathtools,amsthm,amsfonts,amssymb,bm}
 %% graphics packages
-\RequirePackage{graphicx,psfrag,flafter,subfigure}
+\RequirePackage{graphicx,psfrag,flafter,subcaption}
 %% 
 %%%%% ------------------------------------------------------------------------------------------
 %%
@@ -77,17 +81,30 @@
 %%
 %%%%******************************* page layout ******************************************
 %%
-\oddsidemargin 0 true cm
 \if@twoside
-  \evensidemargin 0 true cm
+  \setlength{\voffset}{13pt}          
+  \setlength{\hoffset}{-1pt}          
+  \setlength{\oddsidemargin}{0cm}  
+  \setlength{\evensidemargin}{0cm} 
+  \setlength{\textwidth}{16cm}         
+  \setlength{\textheight}{24.3cm}      
+  \setlength{\topmargin}{-1cm}      
+  \setlength{\headheight}{15pt}        
+  \setlength{\headsep}{4.7mm}    % default: 4.7mm       
+  \setlength{\footskip}{20pt}          
 \else
-  \evensidemargin 0 true cm
+  \setlength{\voffset}{13pt}       
+  \setlength{\hoffset}{-1pt}       
+  \setlength{\oddsidemargin}{0.96cm}   
+  \setlength{\evensidemargin}{-2.04cm} 
+  \setlength{\textwidth}{16cm}         
+  \setlength{\textheight}{24.3cm}      
+  \setlength{\topmargin}{-1cm}      
+  \setlength{\headheight}{15pt}        
+  \setlength{\headsep}{4.7mm}           
+  \setlength{\footskip}{20pt}      
 \fi
-\textheight 24 true cm
-\textwidth 16 true cm
-\topmargin -0.6 true cm
-\headheight 15 pt
-\footskip 32 pt
+
 %%%%% ------------------------------------------------------------------------------------------
 %%
 %%%%********************* some style control commands ********************************
@@ -110,8 +127,10 @@
   \fi}%
 %% space used in items title
 \newcommand\NJUSTspace{\protect\quad\protect\quad}
-%% underline
-\usepackage[normalem]{ulem}
+%% underline - check if ulem package is loaded
+\@ifpackageloaded{ulem}{}{%
+  \RequirePackage[normalem]{ulem}%
+}
 \def\NJUST@underline[#1]#2{%
   \uline{\hbox to #1{\hfill#2\hfill}}}
 \def\NJUSTunderline{\@ifnextchar[\NJUST@underline\uline}
@@ -204,9 +223,6 @@
 \normalfont\songti\zihao{4}
 \def\tabcolsep{1pt}
 \def\arraystretch{1.25}
-%\documentclass[UTF8]{ctexart} 
-%\let\kaishu\relax % 清除旧定义 
-%\newCJKfontfamily\kaishu{KaiTi}[AutoFakeBold] % 重定义 \kaishu
 \begin{tabular}{cc}
       \bfseries\NJUST@label@advisor   &  \NJUSTunderline[299pt]{{\bfseries\kaishu\zihao{3}\NJUST@value@advisor} \hspace{4pt} {\bfseries \kaishu\zihao{4}\NJUST@value@advisortitle}}  \\
       \bfseries\NJUST@label@coadvisor & \NJUSTunderline[299pt]{{\bfseries\kaishu\zihao{3}\NJUST@value@coadvisor} \hspace{4pt} {\bfseries\kaishu\zihao{4}\NJUST@value@coadvisortitle}}  \\
@@ -417,12 +433,39 @@
 %% 4. Eng keywords
 \newcommand\englishkeywords[1]{%
   \vspace{2ex}\noindent{\bf\songti\zihao{4} \NJUST@label@englishkeywords} #1}
-%%
-%% 5. other settings
+%%%%% ------------------------------------------------------------------------------------------
+%%  
+%%%%******************************** make contents **************************************
+%% 
+\renewcommand\tableofcontents{%
+\if@twocolumn
+\@restonecoltrue\onecolumn
+\else
+\@restonecolfalse
+\fi
+{\centering\chapter*{目\NJUSTspace 录}}%
+\addcontentsline{toc}{chapter}{目录}%
+\@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+ \hypersetup{linkcolor=blue}     % contents color, option: black
+    \@starttoc{toc}%
+    \if@restonecol\twocolumn\fi
+    }
+    \addtocontents{toc}{}%\let\string\quad\relax}
+
+\newcommand\Nchapter[1]{%
+  \if@mainmatter%
+    \@mainmatterfalse%
+    \chapter{#1}%
+    \@mainmattertrue%
+  \else
+  \chapter{#1}%
+  \fi
+}
+
 \renewcommand*\l@chapter[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \vskip 1.0em \@plus\p@
+     \vskip 0.0em \@plus\p@%                % ajust dist btw chap
     \setlength\@tempdima{1.5em}%
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
@@ -431,37 +474,13 @@
       \advance\leftskip\@tempdima
       \hskip -\leftskip
       #1\nobreak
-      \leaders\hbox{$\m@th\mkern 1mu\bm{\bm\cdot}\mkern 1mu$}
-      \hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+      \renewcommand{\@dotsep}{4.5}   % default: 4.5, dense of dot, the smaller , the denser
+       \leaders\hbox{$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill
+      \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
       \penalty\@highpenalty
     \endgroup
-  \fi
-}%
-%%%%% ------------------------------------------------------------------------------------------
-%%  
-%%%%******************************** make contents **************************************
-%% 
-\renewcommand\tableofcontents{%
-    \if@twocolumn
-      \@restonecoltrue\onecolumn
-    \else
-      \@restonecolfalse
-    \fi
-    {\centering\chapter*{目\NJUSTspace 录}}%
-    \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
-    \@starttoc{toc}%
-    \if@restonecol\twocolumn\fi
-    }
-\addtocontents{toc}{}%\let\string\quad\relax}
-\newcommand\Nchapter[1]{%
-  \if@mainmatter%
-    \@mainmatterfalse%
-    \chapter{#1}%
-    \@mainmattertrue%
-  \else
-    \chapter{#1}%
-  \fi
-}
+  \fi}
+
 %%%%% ------------------------------------------------------------------------------------------
 %%  
 %%%%************************* make environments *********************************
@@ -484,10 +503,11 @@
   \@starttoc{lot}%% list of tables
   }
 }
-%% figure and table
+%% figure and table content
 \newcommand*\listoffiguresandtables{%
   {\centering
   \chapter*{\NUST@listfiguresandtablesname}%
+  \addcontentsline{toc}{chapter}{图表目录}%
   \@mkboth{\MakeUppercase\NUST@listfiguresandtablesname}%
           {\MakeUppercase\NUST@listfiguresandtablesname}%
   \@starttoc{lof}%% list of figures
@@ -498,10 +518,20 @@
 %%
 
 %% 1. symbol
-\newenvironment{symbolname}
-  {\Nchapter{\NJUST@label@symbolname}}
-  {}
+\RequirePackage{nomencl}
+\newenvironment{symbolname}{%
+  % \chapter*{\centering 符号说明}%  % 直接写标题文本
+  \makenomenclature%
+}{%
+  \addcontentsline{toc}{chapter}{术语表}%
+  \printnomenclature%
+}
 %% 2. bibliography
+\newcommand*\addbibliography[1]{%
+  \addcontentsline{toc}{chapter}{\bibname}
+  {\centering
+    \bibliography{#1}}%
+}
 \renewenvironment{thebibliography}[1]
      {\Nchapter{\centering\bibname}%
       \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
@@ -568,7 +598,23 @@
 \renewenvironment{thanks}
   {{\centering\Nchapter{\NJUST@label@thanks}}}
   {}
-%%
+%% 7. appendix
+\renewcommand\appendix{%
+  \par
+  \setcounter{chapter}{0}%
+  \setcounter{section}{0}%
+  \setcounter{subsection}{0}%
+  \setcounter{equation}{0}%
+  \setcounter{figure}{0}%
+  \setcounter{table}{0}%
+  \gdef\thechapter{\Alph{chapter}}%                    
+  \gdef\thesection{\arabic{section}}%   
+  \gdef\thesubsection{\Alph{chapter}.\arabic{section}.\arabic{subsection}}%
+  \gdef\theequation{A.\arabic{equation}}% 
+  \gdef\thefigure{A.\arabic{figure}}%    
+  \gdef\thetable{A.\arabic{table}}%  
+}
+
 %%%%% ------------------------------------------------------------------------------------------
 %%  
 %%%%*************************** public vars for thesis ***********************************
@@ -589,6 +635,19 @@
 {\end{list}}  
 \renewcommand{\labelenumi}{(\theenumi)}
  
+%%%%% ------------------------------------------------------------------------------------------
+%%  
+%%%%************************* figure and table setting *********************************
+\DeclareCaptionLabelSeparator{none}{ }
+\captionsetup{
+  margin=10.5pt,
+  font=small,
+  labelsep=none,
+  labelfont=bf,
+  belowskip=-10pt
+}
+
+
 \endinput
 %%
 %% End of file `njustThesis.cls'.
