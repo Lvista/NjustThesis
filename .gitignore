@@ -5,6 +5,9 @@
 *.log
 *.nlo
 *.out
+*.lot
+*.lof
+*.nls
 *.pdf
 *.synctex.gz
 *.toc
