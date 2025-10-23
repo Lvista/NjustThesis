@@ -2,7 +2,7 @@
 
 ![最后更新](https://img.shields.io/badge/Latest-2025--10--23-green?logo=github)
 
-**Title(Chinese)**: 南京理工大学硕士学位论文Latex模板
+**Title(Chinese)**: 南京理工大学硕博士位论文Latex模板
 
 **Key Words**: Nanjing University of Science and Technology, NJUST, Latex, Master Thesis,
 南京理工大学, 南理工, Latex, 硕士, 论文, 模板
