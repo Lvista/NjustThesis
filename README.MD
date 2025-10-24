@@ -31,6 +31,10 @@ This repository is based on the [packyan](https://github.com/packyan/NJUST_Maste
 - 对[packyan](https://github.com/packyan/NJUST_Master_Thesis_Latex_Template)版本的模板进行重新编排，删去非必须的设置和代码。
 - 创建了用户参考手册，方便用户使用和后续开发。
 
+## 使用方法
+
+参考`myThesis。pdf`
+
 ## 参考
 
 | 用户名 | 源 |
