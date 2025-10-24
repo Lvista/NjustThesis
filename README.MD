@@ -18,7 +18,7 @@ This repository is based on the [packyan](https://github.com/packyan/NJUST_Maste
 
 ## 介绍
 
-该仓库是基于[packyan](https://github.com/packyan/NJUST_Master_Thesis_Latex_Template)版本的南京理工大学硕士论文LaTeX模板。本项目对原仓库进行重构，兼容性修正。
+该仓库是基于[packyan](https://github.com/packyan/NJUST_Master_Thesis_Latex_Template)版本的南京理工大学硕博士论文LaTeX模板。本项目对原仓库进行重构，兼容性修正。
 
 ## 特点
 
@@ -33,7 +33,7 @@ This repository is based on the [packyan](https://github.com/packyan/NJUST_Maste
 
 ## 使用方法
 
-参考`myThesis。pdf`
+参考`myThesis.pdf`
 
 ## 参考
 
