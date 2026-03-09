@@ -1,6 +1,6 @@
 # NjustThesis
 
-![最后更新](https://img.shields.io/badge/Latest-2025--10--23-green?logo=github)
+![最后更新](https://img.shields.io/badge/Latest-2026--03--09-green?logo=github)
 
 **Title(Chinese)**: 南京理工大学硕博士位论文Latex模板
 
@@ -52,4 +52,14 @@ This repository is based on the [packyan](https://github.com/packyan/NJUST_Maste
 
 | 日期 | 版本 |更新内容 |
 |------|----------|----------|
-| 2024-10-23 |v0.1| 初版模版 |
+| 2026-03-09 |v0.2| 完善绪论 |
+| 2025-10-23 |v0.1| 初版模版 |
+
+## 后言
+
+在完成本模板v0.1后，本人尝试联系学校
+信息化部，发布后让大家一起完善，可以在
+学校公众号的师生服务平台看到，但校方以
+无法确定仓库是否安全为由拒绝了。
+
+对此我也没法多说什么，毕竟国家机密为重。

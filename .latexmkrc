@@ -13,9 +13,9 @@ $pdf_previewer = 'start';          # macOS: 'open', Linux: 'xdg-open', Windows: 
 $recorder = 1;
 
 # Compiler commands
-$pdflatex = 'pdflatex -interaction=nonstopmode -synctex=1 -file-line-error %O %S';
-$xelatex = 'xelatex -interaction=nonstopmode -synctex=1 -file-line-error %O %S';
-$lualatex = 'lualatex -interaction=nonstopmode -synctex=1 -file-line-error %O %S';
+$pdflatex = 'pdflatex -halt-on-error -file-line-error -interaction=nonstopmode -synctex=1 -file-line-error %O %S';
+$xelatex = 'xelatex -halt-on-error -file-line-error -interaction=nonstopmode -synctex=1 -file-line-error %O %S';
+$lualatex = 'lualatex -halt-on-error -file-line-error -interaction=nonstopmode -synctex=1 -file-line-error %O %S';
 
 # BibTeX command
 $bibtex = 'bibtex %O %S';

@@ -4,6 +4,17 @@
 本模板是南京理工大学硕士论文的Latex模版。
 为了方便各位同学使用，并根据自身需求添加或修改配置，在模版正文中加入说明。
 
+\section{放在前面}
+
+注意保密！注意保密！注意保密！重要的事情说三遍。南理作为军工高校，
+对内容的保密一定要谨慎再谨慎，对于有保密的内容，尽量不要使用在线平台进行撰写，
+本模板也尽量简单地给出本地部署的方法和步骤。
+如果对保密没有要求，节也给出了几个在线\LaTeX 编辑器，请注意对自己的行为负责。
+
+另外，学校并没有规定一定要使用\LaTeX 撰写论文，使用\LaTeX 更多的是减少
+对格式问题的关注，同时在格式上也做到严谨。如果您不喜欢\LaTeX 这种代码式的撰写方法，
+请马上停止并使用Word撰写。
+
 \section{相关工作}
 
 关于文献引用的模板，已有多位前辈作出了贡献。2011年不知名前辈\cite{2011njust_thesis}发布了模版，
@@ -13,6 +24,14 @@
 同年用户packyan\cite{2020njust_thesis_master}发布了新的硕士论文模版，修正了中文引用的格式，并删除了一些无用的文件。
 2024年TingweiWang\cite{2024njust_thesis_overleaf}对JunMa11版的Overleaf模版进行了更新，
 并在CSDN上对此模版进行讨论\cite{2024njust_thesis_csdn}。
+
+本仓库主要是对packyan\cite{2020njust_thesis_master}版本进行大量整理，
+去除了过多的个性化修改，只保留对于入门同学的最需要关注的地方，也为部分
+想要深入了解\LaTeX 的同学提供了指引\footnotemark。
+
+\footnotetext{\LaTeX 是一个极其复杂的排版语言，但又足够完美，这一切都源于
+\LaTeX 的作者Donald Knuth，比如TeX 的版本号3.141592653（有兴趣的人可以从wiki上了解）}
+
 
 \section{快速开始}
 
@@ -32,11 +51,13 @@
 
 在进入格式修改和文章的撰写之前，首先需要一个正常编译的环境。
 
+{\textbf{\large  TexLive}}
+
 \LaTeX 有多个发行版，下面的表格总结了几个发行版的特点，各位可按需选择。
 考虑到学术论文写作的环境，推荐使用TexLive进行撰写，撰写本文时使用的也是TexLive。
 
 Note: TexLive在MacOS平台上会被安装在各个角落，
-完全卸载\footnote{指消除所有相关文件而不留痕迹}极为困难，
+完全卸载\footnotemark 极为困难，
 因此并不推荐在MacOS平台使用TexLive。
 
 \begin{table}[htbp]
@@ -55,6 +76,17 @@ Overleaf & 在线 & - & 自动 & 协作项目、临时使用 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+{\textbf{\large  在线平台}}
+
+如果您使用Mac或者对论文保密没有太高要求，可以使用\href{https://www.overleaf.com/}{Overleaf}
+或者\href{https://www.texpage.com/}{TexPage}。
+
+Overleaf广受好评，但免费版编译时长短，基本不可能用来写大论文，而TexPage没有这个限制。
+不过由于Overleaf是开源的，可以将其部署在本地。
+
+\footnotetext{指消除所有相关文件而不留痕迹，对于熟悉现代操作系统
+的人来说，这是几乎成为了一个软件安装时所必须考虑的事}
 
 \subsection{TexLive环境}
 
@@ -79,23 +111,55 @@ from: \url{https://zh.wikipedia.org/wiki/\%e6\%ae\%bc\%e5\%b1\%a4}}
 latex --version
 \end{lstlisting}
 
-    \item 本模版库中有一个测试文件\texttt{test.tex}，可用于测试
+    \item 编译一个大工程需要很多时间，本模版库中有一个测试文件\texttt{test.tex}，可用于测试
     
 \begin{lstlisting}[style=myshell,caption=基本测试]
 #!/bin/bash
 cd ~/njust_latex
-xelatex test.tex
+latexmk -xelatex test.tex
 \end{lstlisting}
 
-    \item 如果以上测试正确，则测试模版文件
+    \item 如果以上测试正确，则测试模版文件，也就是您目前正在阅读的
+    本文档
 
-\begin{lstlisting}[style=myshell,caption=模版测试]
+\begin{lstlisting}[style=myshell, caption=模版测试, label=code:compile]
+#!/bin/bash
+cd ~/njust_latex
+latexmk -xelatex myThesis.tex
+\end{lstlisting}
+
+\end{itemize}
+
+如果正常编译，在输出的日志中会有
+\ilcode{Latexmk: All targets (myThesis.xdv}\\ 
+\ilcode{myThesis.pdf) are up-to-date}
+字样，如果没有，则需要排查错误，即Debug，见下节。
+
+\subsection{Debug}
+
+日志文件\ilcode{myThesis.log}记录了所有编译日志
+（相信没有人愿意通读这个又臭又长的文件）。一种方法是
+从最下面往上找，另外一种方法是通过单独编译命令分开找：
+
+\begin{lstlisting}[style=myshell,caption=第一条子命令]
 #!/bin/bash
 cd ~/njust_latex
 xelatex myThesis.tex
 \end{lstlisting}
 
-\end{itemize}
+因为上一节的代码\ref{code:compile}中的\ilcode{latexmk}
+命令其实是下面命令的链接：
+
+\begin{lstlisting}[style=myshell,caption=基本测试]
+#!/bin/bash
+cd ~/njust_latex
+xelatex myThesis.tex
+bibtex myThesis
+xelatex myThesis.tex
+xelatex myThesis.tex
+\end{lstlisting}
+
+将命令分开，当有错误时，会停止编译并指出错误所在位置。
 
 \section{文件结构}
 
