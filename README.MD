@@ -24,7 +24,7 @@ This repository is based on the [packyan](https://github.com/packyan/NJUST_Maste
 
 - 友好的指引文档
 - 支持 Texlive 2025
-- 支持 [GBT-7714 2015](https://github.com/zepinglee/gbt7714-bibtex-style) 
+- 符合 [GBT-7714 2015](https://github.com/zepinglee/gbt7714-bibtex-style) 标准的参考文献格式
 
 ## 主要贡献
 
@@ -52,6 +52,7 @@ This repository is based on the [packyan](https://github.com/packyan/NJUST_Maste
 
 | 日期 | 版本 |更新内容 |
 |------|----------|----------|
+| 2026-03-09 |v0.3| 修改页面样式 |
 | 2026-03-09 |v0.2| 完善绪论 |
 | 2025-10-23 |v0.1| 初版模版 |
 
@@ -63,3 +64,5 @@ This repository is based on the [packyan](https://github.com/packyan/NJUST_Maste
 无法确定仓库是否安全为由拒绝了。
 
 对此我也没法多说什么，毕竟国家机密为重。
+但格式问题仍然需要更多同学参与校正，
+最好还是有官方的确认。
